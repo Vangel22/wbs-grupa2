@@ -104,4 +104,22 @@ console.log("I have even number in the array:", someElement);
 const sumarnaNiza = niza.reduce((acc, curr) => (acc += curr), 0);
 console.log(sumarnaNiza);
 
-// read("cars.json");
+// Za da procitame read i write
+const { read, write } = require("./read-write");
+
+read("cars.json")
+  .then((res) => console.log(res))
+  .catch((err) => console.log(err));
+
+const newCar = {
+  make: "Audi",
+  model: "A7",
+  year: 2025,
+  color: "Black",
+  mileage: 30000,
+  price: 35000,
+};
+
+write("cars.json", newCar)
+  .then((res) => console.log("Car added!"))
+  .catch((err) => console.log(err));
