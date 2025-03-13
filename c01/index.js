@@ -42,3 +42,66 @@ const { getCar, addCar, updateCar, removeCar } = require("./cars"); // so destru
 // cars.addCar;
 const fs = require("fs");
 const express = require("express");
+
+const person = {
+  name: "Vangel",
+  age: 25,
+};
+
+const { name } = person; // destrukturiranje
+
+const personAdditional = {
+  name: "Andrej",
+  city: "Strumica",
+  profession: "Software Engineer",
+};
+
+const personMerged = {
+  ...person,
+  ...personAdditional,
+  //   Isto kako so spread
+  //   name: "Vangel",
+  //   age: 25,
+  //   name: "Andrej",
+  //   city: "Strumica",
+  //   profession: "Software Engineer",
+};
+
+console.log(personMerged);
+
+const niza = [1, 2, 3, 4, 5];
+
+// find - go vrakja prviot koj go zadovoluva uslovot
+const findFirst = niza.find((el) => el % 2 == 0);
+console.log("find", findFirst);
+
+// map -> vrakja nova niza
+const mapArray = niza.map((el) => {
+  if (el % 2 === 0) {
+    return el + 1;
+  }
+  return el;
+});
+
+const mapArrayTernary = niza.map((el) => (el % 2 === 0 ? el + 1 : el));
+
+console.log("map", mapArray);
+console.log("map ternary", mapArrayTernary);
+
+// filter -> vrakja nova niza
+const filterEvenNumbers = niza.filter((el) => el % 2 === 0);
+console.log("filter", filterEvenNumbers);
+
+// every -> vrakja true ili false vrednost ako site go ispolnuvaat uslovot
+const everyElement = niza.every((el) => el > 0);
+
+console.log("Every element is bigger than zero:", everyElement);
+// some -> vrakja true ili false vrednost ako postoi barem eden sto go zadovoluva uslovot
+const someElement = niza.some((el) => el % 2 === 0);
+console.log("I have even number in the array:", someElement);
+
+// reduce -> nova vrednost koja se skladira vo acc
+const sumarnaNiza = niza.reduce((acc, curr) => (acc += curr), 0);
+console.log(sumarnaNiza);
+
+// read("cars.json");
