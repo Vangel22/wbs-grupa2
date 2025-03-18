@@ -22,7 +22,8 @@ const createVehicle = async (req, res) => {
 
 const updateVehicle = async (req, res) => {
   try {
-    // Vasiot kod ovde
+    await update(req.params.id, req.body);
+    return res.status(200).send("Vehicle updated successfully!");
   } catch (err) {
     console.log(err);
     return res.status(500).send("Internal Server Error!");
