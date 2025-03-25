@@ -1,12 +1,22 @@
 const { Validator } = require("node-input-validator");
 
 // data -> req.body , schema -> Account Schema
+const AccountLogin = {
+  email: "required|email",
+  password: "required|string",
+};
+
+const AccountRegister = {
+  username: "required|string",
+  email: "required|email",
+  password: "required|string",
+  confirmPassword: "required|string",
+};
 
 const AccountCreate = {
   username: "required|string",
   email: "required|email",
   password: "required|string",
-  // test: "required|number",
 };
 
 const AccountUpdate = {
@@ -18,8 +28,6 @@ const AccountUpdate = {
 const validateAccount = async (data, schema) => {
   const validator = new Validator(data, schema);
   const err = await validator.check();
-
-  console.log("Greska", err);
 
   if (!err) {
     throw {
@@ -33,4 +41,6 @@ module.exports = {
   AccountCreate,
   AccountUpdate,
   validateAccount,
+  AccountLogin,
+  AccountRegister,
 };
