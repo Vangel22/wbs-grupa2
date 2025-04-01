@@ -13,6 +13,11 @@ const mongoose = require("mongoose");
 
 const bookSchema = mongoose.Schema(
   {
+    // ako sakame da prebaruvame po kod mora da bide unikaten
+    bookCode: {
+      type: String,
+      unique: true,
+    },
     title: String,
     author: String,
     language: String,
@@ -42,6 +47,11 @@ const BookModel = mongoose.model("Book", bookSchema, "books");
 // get
 const getBooks = async () => {
   return await BookModel.find();
+};
+
+// get one book
+const getSingleBook = async (id) => {
+  return await BookModel.findOne({ _id: id });
 };
 
 // get author books
