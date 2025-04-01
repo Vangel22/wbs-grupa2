@@ -1,0 +1,1 @@
+Model/schema za filmovi so multitenancy, istata aplikacija od chasot da se preobrazi.

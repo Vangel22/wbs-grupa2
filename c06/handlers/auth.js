@@ -23,6 +23,7 @@ const login = async (req, res) => {
     }
 
     const payload = {
+      // vo pozadina ova e req.auth koga ke imame uspesno logiranje
       username: account.username,
       email: account.email,
       id: account._id,

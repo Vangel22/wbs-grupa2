@@ -20,6 +20,12 @@ const bookSchema = mongoose.Schema(
     genre: String,
     publicationDate: Date,
     publisher: String,
+    // author_id e relevantno ime ovde, se raboti za account
+    author_id: {
+      type: mongoose.SchemaTypes.ObjectId,
+      ref: "Account", // pratete ja referencata i ke znaete za koj model stanuva zbor
+      immutable: true,
+    },
 
     // book: {
     //     type: mongoose.SchemaTypes.ObjectId,
@@ -36,6 +42,11 @@ const BookModel = mongoose.model("Book", bookSchema, "books");
 // get
 const getBooks = async () => {
   return await BookModel.find();
+};
+
+// get author books
+const getAuthorBooks = async (author_id) => {
+  return await BookModel.find({ author_id: author_id });
 };
 
 // create
@@ -59,6 +70,7 @@ module.exports = {
   createBook,
   updateBook,
   removeBook,
+  getAuthorBooks,
 };
 
 // class BookModelClass {
