@@ -41,6 +41,7 @@ app.post("/auth/reset", resetPassword);
 
 // Storage routes
 app.post("/api/storage", upload);
+// app.post("/api/storage", (req, res) => {}, (req, res) => {});
 app.get("/api/storage/:filename", download);
 
 // Posts routes
@@ -50,6 +51,8 @@ app.put("/posts/:id", updatePost);
 app.delete("/posts/:id", removePost);
 
 // Recipe routes
+
+// app.post("http://facebook.com/calculate", nekojaFunkcija)
 
 app.listen(getSection("development").port, () =>
   console.log(`Server started at port ${getSection("development").port}`)

@@ -1,0 +1,65 @@
+const { getSection } = require("../config");
+
+const CACHE = {};
+
+getCityWeather("skopje"); // 21:07
+getCityWeather("skopje"); // 21:16
+
+
+const getCityWeather = async (city) => {
+  // Prva iteracija: Od 1 Jan 1970 do 10 April 2025 godina vo 21:07 ke se zeme vremeto vo milisekundi, / 1000 ke go pretvori vo sekundi
+  // Vtora iteracija: Od 1 Jan 1970 do 10 April 2025 godina vo 21:16 ke se zeme vremeto vo milisekundi, / 1000 ke go pretvori vo sekundi
+  let now = new Date().getTime() / 1000; // 21:07, 21:16
+  console.log("CACHE", CACHE);
+  // CACHE = {} // 21:07
+  // CACHE = {
+    skopje: {
+        timestamp: 21:07, // vo vistinskiot kod ova e zapisano vo sekundi
+        data: data // podatoci za gradot skopje
+    }
+  } // 21:16
+
+  // 21:07 CACHE[city] ne postoi, if uslovot ke se ignorira
+  // 21:16 // CACHE["skopje"] &&  now(21:16) < CACHE["skopje"].timestamp(21:07) + getSection("weather").cache_expiery(10 minuti) 
+  // 21:16 // CACHE["skopje"] &&  21:16 < 21:17
+  if (
+    CACHE[city] &&
+    now < CACHE[city].timestamp + getSection("weather").cache_expiery
+  ) {
+    console.log("Data is from cache");
+    return CACHE[city]; // se vrakja gradot od CACHE objektot vo 21:16 chasot
+  }
+
+  // 21:07 nie ja povikavme funkcijata so gradot "skopje"
+  const URL = `${
+    getSection("weather").API_URL
+  }/weather?q=${city}&units=metric&appid=${getSection("weather").api_key}`;
+  // https://api.openweathermap.org/data/2.5/weather?q=skopje&units=metric&appid=VASIOT_API_KLUC // 21:07
+
+  try {
+    const res = await fetch(URL); -> mozete da go povikate odreden broj pati (pr. 1000 pati vo 24h)
+    const data = await res.json(); -> ovde imame podatoci za gradot skopje koj bese pobaran vo 21:07
+
+    // Ova se preveduva:
+    CACHE[city] = {
+      timestamp: new Date().getTime() / 1000,
+      data: data,
+    };
+
+    // Vo ova:
+    CACHE = {
+        skopje: {
+            timestamp: new Date().getTime() / 1000, // 21:07
+            data: data, // ova se podatocite koj mi vrakja openweathermap softverot
+        }
+    }
+
+    return data;
+  } catch (err) {
+    throw err;
+  }
+};
+
+module.exports = {
+  getCityWeather,
+};
