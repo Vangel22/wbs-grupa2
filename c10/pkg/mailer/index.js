@@ -5,8 +5,6 @@ const mailgun = new Mailgun(formData);
 
 const { getSection } = require("../config");
 
-// const mg = mailgun.client({username: 'api', key: process.env.MAILGUN_API_KEY || 'key-yourkeyhere'});
-
 const mailTemplates = {
   WELCOME: {
     title: "Welcome to our website",
