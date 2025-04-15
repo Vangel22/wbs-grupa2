@@ -5,6 +5,7 @@ const sendWelcomeMail = async (req, res) => {
   try {
     await validate(req.body, MailgunFields);
     const result = await sendMail(req.body.to, "WELCOME", req.body.message);
+    // req.body.message = {first_name, last_name, email}
     return res.status(200).send(result);
   } catch (err) {
     console.error(err);
@@ -20,6 +21,8 @@ const sendPasswordResetMail = async (req, res) => {
       "PASSWORD_RESET",
       req.body.message
     );
+    // req.body.message = {first_name, last_name, link}
+
     return res.status(200).send(result);
   } catch (err) {
     console.error(err);
