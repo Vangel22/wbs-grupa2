@@ -24,6 +24,10 @@ const mailTemplates = {
 const sendMail = async (to, type, data) => {
   try {
     // type moze da bide WELCOME ili PASSWORD_TEMPLATE
+    const mg = mailgun.client({
+      username: "api",
+      key: getSection("development").api_key || "",
+    });
 
     const title = mailTemplates[type].title;
     // mailTemplates["WELCOME"].title
